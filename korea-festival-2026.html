@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korea Festival 2026 — Presentation Slide Deck (15 Slides)</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- Chart.js for Interactive Charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Noto+Serif+KR:wght@300;400;600;700&family=Instrument+Serif:ital@0;1&family=Share+Tech+Mono&family=Caveat:wght@700&display=swap');
+
+body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; background-color: #0B0F19; color: #F3F4F6; }
+.font-serif-title { font-family: 'Instrument Serif', 'Noto Serif KR', Georgia, serif; }
+.font-kr { font-family: 'Noto Serif KR', serif; }
+.font-mono-fids { font-family: 'Share Tech Mono', monospace; }
+
+/* SUBTLE & FADED MICRO APPLE LIQUID GLASS STYLING */
+.apple-liquid-glass-subtle {
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.65);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "DM Sans", sans-serif;
+  opacity: 0.6;
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.apple-liquid-glass-subtle:hover {
+  opacity: 1;
+  background: rgba(15, 23, 42, 0.75);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 24px 0 rgba(239, 68, 68, 0.3);
+  color: rgba(255, 255, 255, 1);
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* SLIDE CONTAINER & ANIMATIONS */
+.slide {
+  display: none;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide.active {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ticket-yellow-accent { background: #FFD600; color: #111827; }
+.stamp-seal {
+  width: 64px; height: 64px;
+  border: 2px dashed #00A896; color: #00A896;
+  border-radius: 50%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transform: rotate(-12deg);
+  font-family: 'Share Tech Mono', monospace; text-align: center;
+  background: rgba(0, 168, 150, 0.05);
+}
+
+/* CUSTOM SCROLLBAR FOR SLIDES */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #111827; }
+::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #EF4444; }
+</style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col justify-between select-none">
+
+<!-- SUBTLE & FADED MICRO FLOATING BUTTON AT BOTTOM RIGHT CORNER -->
+<div class="fixed bottom-14 right-3 z-50 pointer-events-auto">
+  <div class="apple-liquid-glass-subtle px-2.5 py-1 rounded-full text-[10px] tracking-tight flex items-center gap-1.5 cursor-default group">
+    <span class="w-1.5 h-1.5 rounded-full bg-red-500/80 group-hover:bg-red-500 animate-pulse"></span>
+    <span class="text-gray-300/80 group-hover:text-white transition-colors">design by <strong class="font-semibold text-white/90 group-hover:text-white">Sisamane.d</strong></span>
+  </div>
+</div>
+
+<!-- TOP DECK CONTROL BAR -->
+<header class="bg-gray-950 text-white px-6 py-3 border-b border-gray-800 flex items-center justify-between z-30 shrink-0 font-mono-fids">
+  <div class="flex items-center gap-3">
+    <span class="w-3 h-3 rounded-full bg-red-600 animate-ping"></span>
+    <span class="text-xs font-bold text-red-400 bg-red-950/80 border border-red-500/30 px-2.5 py-0.5 rounded-full">
+      KOREA FESTIVAL 2026 SLIDE DECK
+    </span>
+    <span class="text-xs text-gray-400 hidden sm:inline">| Trip to K-Culture Presentation (15 Slides)</span>
+  </div>
+
+  <div class="flex items-center gap-4 text-xs">
+    <!-- SLIDE COUNTER -->
+    <div class="bg-gray-900 px-3 py-1 rounded-full border border-gray-800 font-bold">
+      SLIDE <span id="currentSlideNum" class="text-red-400">01</span> / <span id="totalSlideNum">15</span>
+    </div>
+
+    <!-- PREV / NEXT BUTTONS -->
+    <div class="flex items-center gap-1.5">
+      <button onclick="prevSlide()" class="w-8 h-8 rounded-full bg-gray-900 hover:bg-gray-800 text-white flex items-center justify-center border border-gray-700 transition-colors">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+      </button>
+      <button onclick="nextSlide()" class="w-8 h-8 rounded-full bg-gray-900 hover:bg-gray-800 text-white flex items-center justify-center border border-gray-700 transition-colors">
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div class="w-full bg-gray-900 h-1 z-30 shrink-0">
+  <div id="progressBar" class="bg-gradient-to-r from-red-600 via-amber-500 to-red-600 h-full w-[6.66%] transition-all duration-300"></div>
+</div>
+
+
+<!-- ========================================================= -->
+<!-- SLIDES CONTAINER (15 SLIDES TOTAL) -->
+<!-- ========================================================= -->
+<main class="flex-1 relative overflow-hidden p-4 sm:p-8 flex items-center justify-center">
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 1: COVER TITLE SLIDE -->
+  <!-- ========================================================= -->
+  <section id="slide-1" class="slide active w-full max-w-6xl h-full flex-col justify-between bg-gradient-to-br from-gray-950 via-gray-900 to-black p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl relative overflow-hidden">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <div class="flex items-center gap-2 text-xs text-amber-400 font-bold">
+        <span>✈️ INCHEON INT'L AIRPORT KIOSK #04</span>
+        <span>•</span>
+        <span>OFFICIAL BRAND PROPOSAL</span>
+      </div>
+      <span class="text-xs bg-red-600 text-white px-3 py-1 rounded-full font-bold">23-24 OCT 2026</span>
+    </div>
+
+    <div class="my-auto py-6">
+      <div class="inline-block bg-yellow-400 text-gray-900 text-xs font-mono-fids font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
+        Parkson Laos • Vientiane
+      </div>
+      <h1 class="text-5xl sm:text-7xl font-extrabold tracking-tight text-white font-serif-title uppercase leading-none mb-3">
+        TRIP TO <span class="text-red-600">K-CULTURE</span>
+      </h1>
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-300 font-kr mb-4">
+        라오스에서 만나는 한국 문화 & K-POP 축제
+      </h2>
+      <p class="text-sm sm:text-base text-gray-400 max-w-2xl leading-relaxed">
+        An airport-inspired cultural journey. Step through 7 terminal gates, experience K-Beauty, Hanbok heritage, Hongdae street dance, authentic K-Food, and 30-day marketing roadmap.
+      </p>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex flex-wrap items-center justify-between text-xs text-gray-400 font-mono-fids">
+      <div class="flex items-center gap-4">
+        <span>Presented by: <strong class="text-white">KOTRA</strong></span>
+        <span>Organized by: <strong class="text-white">Fanglao Studio</strong></span>
+      </div>
+      <span>CONFIDENTIAL BRAND DECK 2026</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 2: EXECUTIVE SUMMARY & EVENT OVERVIEW -->
+  <!-- ========================================================= -->
+  <section id="slide-2" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 02 • EXECUTIVE OVERVIEW</span>
+      <span class="text-xs text-gray-400">KOREA FESTIVAL 2026</span>
+    </div>
+
+    <div class="my-auto space-y-6">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-serif-title uppercase">
+        Executive Summary & Core Event Concept
+      </h2>
+      <p class="text-sm sm:text-base text-gray-300 leading-relaxed max-w-3xl">
+        Korea Festival 2026 transforms Parkson Laos Shopping Center into a simulated Incheon Airport terminal. Visitors receive an official Festival Passport upon arrival and embark on an immersive 7-gate cultural flight.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono-fids pt-4">
+        <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800">
+          <div class="text-red-400 text-2xl font-bold mb-1">20,000+</div>
+          <div class="text-xs text-gray-400 uppercase font-bold">Target Visitors</div>
+          <p class="text-[11px] text-gray-500 mt-2">Expected 2-day turnout at Parkson Laos</p>
+        </div>
+
+        <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800">
+          <div class="text-amber-400 text-2xl font-bold mb-1">7 GATES</div>
+          <div class="text-xs text-gray-400 uppercase font-bold">Airport Zones</div>
+          <p class="text-[11px] text-gray-500 mt-2">K-Beauty, Hanbok, Food, Stage & Crafts</p>
+        </div>
+
+        <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800">
+          <div class="text-emerald-400 text-2xl font-bold mb-1">1.2M+</div>
+          <div class="text-xs text-gray-400 uppercase font-bold">Campaign Reach</div>
+          <p class="text-[11px] text-gray-500 mt-2">30-day multi-channel digital marketing</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>VENUE: PARKSON LAOS, VIENTIANE</span>
+      <span>DATES: 23-24 OCTOBER 2026</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 3: AIRPORT CHECK-IN COUNTER DESKS 01 - 03 -->
+  <!-- ========================================================= -->
+  <section id="slide-3" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 03 • CHECK-IN COUNTER DESKS</span>
+      <span class="text-xs text-gray-400">3-STEP VISITOR JOURNEY</span>
+    </div>
+
+    <div class="my-auto space-y-6">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-serif-title uppercase">
+        3 Airport Check-In Counter Desks
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-gray-950 p-6 rounded-2xl border-2 border-orange-500 flex flex-col justify-between">
+          <div>
+            <div class="text-xs font-mono-fids text-orange-400 font-bold mb-1">DESK 01 • ENTRANCE</div>
+            <h3 class="text-lg font-bold text-white mb-2">Check-In & Passport</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Walk up to Desk 01 right at the entrance. Scan QR code to pick up official Festival Passport booklet & Boarding Pass ticket.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-800 text-[11px] font-mono-fids text-orange-400">
+            ✓ Ticket #KF2026 & Passport Drop
+          </div>
+        </div>
+
+        <div class="bg-gray-950 p-6 rounded-2xl border-2 border-blue-500 flex flex-col justify-between">
+          <div>
+            <div class="text-xs font-mono-fids text-blue-400 font-bold mb-1">DESK 02 • TERMINAL</div>
+            <h3 class="text-lg font-bold text-white mb-2">7 Gates Stamp Station</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Explore all 7 experience gates. Present passport at Desk 02 for custom ink stamps after completing zone activities.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-800 text-[11px] font-mono-fids text-blue-400">
+            ✓ Collect 7 Ink Stamps
+          </div>
+        </div>
+
+        <div class="bg-gray-950 p-6 rounded-2xl border-2 border-emerald-500 flex flex-col justify-between">
+          <div>
+            <div class="text-xs font-mono-fids text-emerald-400 font-bold mb-1">DESK 03 • MAIN STAGE</div>
+            <h3 class="text-lg font-bold text-white mb-2">Lucky Draw Prize Desk</h3>
+            <p class="text-xs text-gray-400 leading-relaxed">
+              Submit fully stamped passport into the Grand Prize Ticket Box at Desk 03 for sponsor electronic prizes & flight vouchers!
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-800 text-[11px] font-mono-fids text-emerald-400">
+            ✓ Prize Box Drop & Finale Draw
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>CHECK-IN SYSTEM: OPEN</span>
+      <span>PASSPORT STAMPING ACTIVE</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 4: 7 TERMINAL GATES OVERVIEW -->
+  <!-- ========================================================= -->
+  <section id="slide-4" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 04 • TERMINAL GATES OVERVIEW</span>
+      <span class="text-xs text-gray-400">7 CULTURAL EXPERIENCE GATES</span>
+    </div>
+
+    <div class="my-auto space-y-4">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-serif-title uppercase">
+        7 Airport E-Gate Boarding Scanners
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono-fids text-xs">
+        <div class="bg-gray-950 p-4 rounded-xl border border-red-500">
+          <strong class="text-red-400 block mb-1">GATE 01</strong>
+          <span class="text-white font-bold block">Incheon Arrival</span>
+          <span class="text-gray-500 text-[10px]">Passport & Registration</span>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-rose-500">
+          <strong class="text-rose-400 block mb-1">GATE 02</strong>
+          <span class="text-white font-bold block">Myeongdong Beauty</span>
+          <span class="text-gray-500 text-[10px]">Personal Tone & Skincare</span>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-amber-500">
+          <strong class="text-amber-400 block mb-1">GATE 03</strong>
+          <span class="text-white font-bold block">DIY Calligraphy</span>
+          <span class="text-gray-500 text-[10px]">Han-geul Craft Workshop</span>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-blue-500">
+          <strong class="text-blue-400 block mb-1">GATE 04</strong>
+          <span class="text-white font-bold block">Hanbok Heritage</span>
+          <span class="text-gray-500 text-[10px]">Palace Photo Studio</span>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-purple-500">
+          <strong class="text-purple-400 block mb-1">GATE 05</strong>
+          <span class="text-white font-bold block">Hongdae Youth</span>
+          <span class="text-gray-500 text-[10px]">Random K-Pop Dance</span>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-red-500">
+          <strong class="text-red-400 block mb-1">GATE 06</strong>
+          <span class="text-white font-bold block">Gwanghwamun Stage</span>
+          <span class="text-gray-500 text-[10px]">Talent & Dance Contest</span>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-amber-500 col-span-2">
+          <strong class="text-amber-400 block mb-1">GATE 07</strong>
+          <span class="text-white font-bold block">K-Food Duty Free Street</span>
+          <span class="text-gray-500 text-[10px]">Authentic Tteokbokki Stalls & Cooking Demonstrations</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>TURNSTILE: AUTOMATIC E-GATES</span>
+      <span>ALL 7 GATES OPERATIONAL</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 5: GATE 01 & 02 DETAILS -->
+  <!-- ========================================================= -->
+  <section id="slide-5" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 05 • GATES 01 & 02 DETAILS</span>
+      <span class="text-xs text-gray-400">ARRIVAL & BEAUTY</span>
+    </div>
+
+    <div class="my-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <span class="bg-red-600 text-white text-[10px] font-mono-fids px-2.5 py-1 rounded">GATE 01</span>
+        <h3 class="text-xl font-bold text-white">Incheon Airport Arrival Zone</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Korean airport arrival gateway. Collect official festival passport, physical boarding pass ticket, and complete registration for the grand lucky draw.
+        </p>
+        <ul class="text-xs text-gray-400 space-y-1 font-mono-fids pt-2">
+          <li>✓ QR Boarding Ticket Scan</li>
+          <li>✓ Festival Passport Distribution</li>
+          <li>✓ Information Kiosk Guidance</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <span class="bg-rose-600 text-white text-[10px] font-mono-fids px-2.5 py-1 rounded">GATE 02</span>
+        <h3 class="text-xl font-bold text-white">Myeongdong K-Beauty Street</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Korean skincare & cosmetics testing zone. Features personal tone skin diagnosis, live makeup demonstrations, and brand sampling stations.
+        </p>
+        <ul class="text-xs text-gray-400 space-y-1 font-mono-fids pt-2">
+          <li>✓ Personal Skin Tone Matching</li>
+          <li>✓ K-Beauty Skincare Consultation</li>
+          <li>✓ Product Samples & Goodie Bags</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>GATE STATUS: ACTIVE</span>
+      <span>INSPECTED & APPROVED</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 6: GATE 03 & 04 DETAILS -->
+  <!-- ========================================================= -->
+  <section id="slide-6" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 06 • GATES 03 & 04 DETAILS</span>
+      <span class="text-xs text-gray-400">DIY CRAFTS & HANBOK</span>
+    </div>
+
+    <div class="my-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <span class="bg-amber-600 text-white text-[10px] font-mono-fids px-2.5 py-1 rounded">GATE 03</span>
+        <h3 class="text-xl font-bold text-white">DIY Calligraphy & Craft Workshop</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Hands-on Korean cultural workshops. Visitors write their names in Han-geul calligraphy, create custom K-Pop photocards, and decorate keychains.
+        </p>
+        <ul class="text-xs text-gray-400 space-y-1 font-mono-fids pt-2">
+          <li>✓ Han-geul Name Calligraphy</li>
+          <li>✓ K-Pop Photocard DIY Studio</li>
+          <li>✓ Traditional Vocabulary Games</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <span class="bg-blue-600 text-white text-[10px] font-mono-fids px-2.5 py-1 rounded">GATE 04</span>
+        <h3 class="text-xl font-bold text-white">Hanbok Rental & Palace Photo Studio</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Dress in traditional silk Hanbok attire. Pose against high-resolution Gyeongbokgung palace photo backdrops and play traditional folk games.
+        </p>
+        <ul class="text-xs text-gray-400 space-y-1 font-mono-fids pt-2">
+          <li>✓ Silk Hanbok Fitting Studio</li>
+          <li>✓ Gyeongbokgung Palace Photo Zone</li>
+          <li>✓ Yutnori & Jegi-chagi Folk Games</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>GATE STATUS: ACTIVE</span>
+      <span>INSPECTED & APPROVED</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 7: GATE 05 & 06 DETAILS -->
+  <!-- ========================================================= -->
+  <section id="slide-7" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 07 • GATES 05 & 06 DETAILS</span>
+      <span class="text-xs text-gray-400">HONGDAE DANCE & MAIN STAGE</span>
+    </div>
+
+    <div class="my-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <span class="bg-purple-600 text-white text-[10px] font-mono-fids px-2.5 py-1 rounded">GATE 05</span>
+        <h3 class="text-xl font-bold text-white">Hongdae Random Dance Play</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          High-energy Gen Z youth platform featuring public Random K-Pop Dance Play, TikTok video challenge booths, and youth busking performances.
+        </p>
+        <ul class="text-xs text-gray-400 space-y-1 font-mono-fids pt-2">
+          <li>✓ Random K-Pop Dance Play Sessions</li>
+          <li>✓ TikTok Challenge Video Booths</li>
+          <li>✓ Street Busking & Youth Music</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <span class="bg-red-600 text-white text-[10px] font-mono-fids px-2.5 py-1 rounded">GATE 06</span>
+        <h3 class="text-xl font-bold text-white">Gwanghwamun Main Stage Arena</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Grand opening ceremony, K-Pop Cover Dance Competition, Korea Talent Contest, live audience voting, and Grand Lucky Draw finale.
+        </p>
+        <ul class="text-xs text-gray-400 space-y-1 font-mono-fids pt-2">
+          <li>✓ Cover Dance & Talent Contest Finals</li>
+          <li>✓ Live Audience Voting System</li>
+          <li>✓ Grand Lucky Draw Winner Reveal</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>GATE STATUS: ACTIVE</span>
+      <span>INSPECTED & APPROVED</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 8: GATE 07 K-FOOD MARKET DETAILS -->
+  <!-- ========================================================= -->
+  <section id="slide-8" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-amber-400 font-bold uppercase tracking-widest">SLIDE 08 • GATE 07 K-FOOD MARKET</span>
+      <span class="text-xs text-gray-400">CUISINE & COOKING SHOWCASES</span>
+    </div>
+
+    <div class="my-auto space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="bg-amber-600 text-white text-xs font-mono-fids px-3 py-1 rounded-full font-bold">GATE 07</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-serif-title uppercase">
+          Authentic K-Food Street & Culinary Showcase
+        </h2>
+      </div>
+
+      <p class="text-sm text-gray-300 leading-relaxed max-w-3xl">
+        Authentic Korean street food night market featuring Tteokbokki, Korean Corndogs, Bingsu desserts, snacks, and popular beverages. Accompanied by live cooking demonstrations and food trivia quizzes.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono-fids">
+        <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800">
+          <strong class="text-amber-400 block mb-1 text-base">🍜 FOOD STALLS</strong>
+          <p class="text-xs text-gray-400">Authentic Tteokbokki, Corndogs, Kimchi fried rice & snacks.</p>
+        </div>
+        <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800">
+          <strong class="text-amber-400 block mb-1 text-base">🍳 COOKING SHOW</strong>
+          <p class="text-xs text-gray-400">Live Korean chef masterclass & recipe demonstrations.</p>
+        </div>
+        <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800">
+          <strong class="text-amber-400 block mb-1 text-base">🧠 FOOD QUIZZES</strong>
+          <p class="text-xs text-gray-400">Interactive Korean food & language trivia contest with prizes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>FOOD SAFETY: CERTIFIED</span>
+      <span>HYGIENE & LICENSING APPROVED</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 9: PARKSON LAOS FLOOR PLAN MAP -->
+  <!-- ========================================================= -->
+  <section id="slide-9" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 09 • PARKSON LAOS MAP</span>
+      <span class="text-xs text-gray-400">2D BLUEPRINTS & 3D RENDERS</span>
+    </div>
+
+    <div class="my-auto space-y-4">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-serif-title uppercase">
+        Parkson Laos Ground Floor Plan Map
+      </h2>
+      <p class="text-xs sm:text-sm text-gray-300 max-w-3xl">
+        Architectural blueprint mapping all 7 zone pins across Parkson Laos Shopping Center ground floor atrium in Vientiane.
+      </p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono-fids pt-2">
+        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+          <strong class="text-red-400 block">PIN 1: MASTER 2D</strong>
+          <span class="text-gray-400 text-[10px]">Overall Hall Layout</span>
+        </div>
+        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+          <strong class="text-red-400 block">PIN 2: ENTRANCE</strong>
+          <span class="text-gray-400 text-[10px]">Arrival Arch Blueprint</span>
+        </div>
+        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+          <strong class="text-red-400 block">PIN 3: BEAUTY</strong>
+          <span class="text-gray-400 text-[10px]">K-Beauty Promenade</span>
+        </div>
+        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+          <strong class="text-red-400 block">PIN 4: DIY CRAFT</strong>
+          <span class="text-gray-400 text-[10px]">Workshop Tables</span>
+        </div>
+        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+          <strong class="text-red-400 block">PIN 5: HANBOK</strong>
+          <span class="text-gray-400 text-[10px]">Palace Photo Lounge</span>
+        </div>
+        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
+          <strong class="text-red-400 block">PIN 6: MAIN STAGE</strong>
+          <span class="text-gray-400 text-[10px]">Acoustics & Lighting</span>
+        </div>
+        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 col-span-2">
+          <strong class="text-red-400 block">PIN 7: K-FOOD MARKET</strong>
+          <span class="text-gray-400 text-[10px]">Night Market Food Stalls</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>BLUEPRINT VERSION: 2026.10</span>
+      <span>PARKSON ATRIUM GROUND FLOOR</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 10: 30-DAY INTEGRATED MARKETING PLAN OVERVIEW -->
+  <!-- ========================================================= -->
+  <section id="slide-10" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 10 • MARKETING STRATEGY</span>
+      <span class="text-xs text-gray-400">30-DAY CAMPAIGN ROADMAP</span>
+    </div>
+
+    <div class="my-auto space-y-6">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-serif-title uppercase">
+        30-Day Integrated Marketing Campaign
+      </h2>
+      <p class="text-sm text-gray-300 leading-relaxed max-w-3xl">
+        Designed with airport overhead wayfinding signboard themes. Four distinct campaign phases designed to maximize pre-registration, viral creator seeding, and event day turnouts.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 font-mono-fids">
+        <div class="bg-gray-950 p-4 rounded-xl border-l-4 border-red-500">
+          <div class="text-[10px] text-red-400 font-bold">PHASE 01 (01-10 OCT)</div>
+          <strong class="text-white block mt-1">Teaser & QR Launch</strong>
+          <span class="text-[11px] text-gray-400">250K+ Impressions</span>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border-l-4 border-blue-500">
+          <div class="text-[10px] text-blue-400 font-bold">PHASE 02 (11-17 OCT)</div>
+          <strong class="text-white block mt-1">50+ KOL PR Box</strong>
+          <span class="text-[11px] text-gray-400">500K+ Video Views</span>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border-l-4 border-purple-500">
+          <div class="text-[10px] text-purple-400 font-bold">PHASE 03 (18-22 OCT)</div>
+          <strong class="text-white block mt-1">TikTok Dance Contest</strong>
+          <span class="text-[11px] text-gray-400">3,000+ UGC Clips</span>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border-l-4 border-amber-500">
+          <div class="text-[10px] text-amber-400 font-bold">PHASE 04 (23-24 OCT)</div>
+          <strong class="text-white block mt-1">4K Live Stream</strong>
+          <span class="text-[11px] text-gray-400">50K+ Live Viewers</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>CAMPAIGN STATUS: ACTIVE</span>
+      <span>TARGET ROAS: OPTIMAL</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 11: MARKETING PHASES 01 & 02 DETAILS -->
+  <!-- ========================================================= -->
+  <section id="slide-11" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 11 • MARKETING PHASES 01 & 02</span>
+      <span class="text-xs text-gray-400">TEASER & INFLUENCERS</span>
+    </div>
+
+    <div class="my-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <div class="flex items-center justify-between text-xs font-mono-fids">
+          <span class="bg-red-600 text-white px-2.5 py-1 rounded font-bold">WAYFINDING 01</span>
+          <span class="text-red-400 font-bold">01–10 OCT</span>
+        </div>
+        <h3 class="text-xl font-bold text-white">Teaser & Pre-Registration Launch</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Release 10-day Instagram motion graphics, 30s TikTok trailer video, and open official QR Boarding Pass pre-registration portal.
+        </p>
+        <div class="bg-gray-900 p-3 rounded-xl text-xs font-mono-fids text-amber-400">
+          KPI: 250,000+ Impressions · 5,000+ Pre-Registered QR Passes
+        </div>
+      </div>
+
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <div class="flex items-center justify-between text-xs font-mono-fids">
+          <span class="bg-blue-600 text-white px-2.5 py-1 rounded font-bold">WAYFINDING 02</span>
+          <span class="text-blue-400 font-bold">11–17 OCT</span>
+        </div>
+        <h3 class="text-xl font-bold text-white">50+ KOL PR Box Seeding</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Deliver custom Korean Festival VIP PR gift boxes to 50+ Vientiane lifestyle, beauty, and K-Pop creators. Drive TikTok unboxing reactions.
+        </p>
+        <div class="bg-gray-900 p-3 rounded-xl text-xs font-mono-fids text-blue-400">
+          KPI: 500,000+ Video Views · 50+ Influencer Unboxing Posts
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>MEDIA CHANNELS: TIKTOK, INSTAGRAM, FACEBOOK</span>
+      <span>TIMELINE: ON SCHEDULE</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 12: MARKETING PHASES 03 & 04 DETAILS -->
+  <!-- ========================================================= -->
+  <section id="slide-12" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 12 • MARKETING PHASES 03 & 04</span>
+      <span class="text-xs text-gray-400">DANCE CONTEST & 4K LIVE</span>
+    </div>
+
+    <div class="my-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <div class="flex items-center justify-between text-xs font-mono-fids">
+          <span class="bg-purple-600 text-white px-2.5 py-1 rounded font-bold">WAYFINDING 03</span>
+          <span class="text-purple-400 font-bold">18–22 OCT</span>
+        </div>
+        <h3 class="text-xl font-bold text-white">TikTok Random Dance Contest</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Launch public TikTok Cover Dance Contest & IG Story polls. Awarding VIP Fast-Track passes to top 20 video creators.
+        </p>
+        <div class="bg-gray-900 p-3 rounded-xl text-xs font-mono-fids text-purple-400">
+          KPI: 3,000+ UGC Video Clips · 25,000+ Poll Votes
+        </div>
+      </div>
+
+      <div class="bg-gray-950 p-6 rounded-2xl border border-gray-800 space-y-3">
+        <div class="flex items-center justify-between text-xs font-mono-fids">
+          <span class="bg-amber-600 text-white px-2.5 py-1 rounded font-bold">WAYFINDING 04</span>
+          <span class="text-amber-400 font-bold">23–24 OCT</span>
+        </div>
+        <h3 class="text-xl font-bold text-white">4K Live Stream & Lucky Draw</h3>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Multi-camera 4K Live Broadcast on FB & TikTok, real-time Cover Dance audience voting, and Grand Lucky Draw winner announcements.
+        </p>
+        <div class="bg-gray-900 p-3 rounded-xl text-xs font-mono-fids text-amber-400">
+          KPI: 50,000+ Live Viewers · 20,000+ Mall Attendees
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>MEDIA CHANNELS: TIKTOK LIVE, FACEBOOK LIVE</span>
+      <span>BROADCAST READY</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 13: FLIGHT SCHEDULE & TIMETABLE AGENDA (FIDS) -->
+  <!-- ========================================================= -->
+  <section id="slide-13" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 13 • FLIGHT SCHEDULE TIMETABLE</span>
+      <span class="text-xs text-gray-400">DAY 1 & DAY 2 PROGRAM</span>
+    </div>
+
+    <div class="my-auto grid grid-cols-1 md:grid-cols-2 gap-6 font-mono-fids text-xs">
+      <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 space-y-2">
+        <div class="text-amber-400 font-bold border-b border-gray-800 pb-2">✈️ DAY 1 • 23 OCT 2026 (FLIGHT KF2026-D1)</div>
+        <div class="flex justify-between py-1 border-b border-gray-900"><span>10:00 - 11:00</span><span>Passport Registration</span></div>
+        <div class="flex justify-between py-1 border-b border-gray-900"><span>10:00 - 18:00</span><span>All 7 Gates Open</span></div>
+        <div class="flex justify-between py-1 border-b border-gray-900 text-red-400 font-bold"><span>17:00 - 18:00</span><span>Opening Ceremony</span></div>
+        <div class="flex justify-between py-1 text-red-400 font-bold"><span>18:00 - 20:00</span><span>K-Pop Cover Dance Contest</span></div>
+      </div>
+
+      <div class="bg-gray-950 p-5 rounded-2xl border border-gray-800 space-y-2">
+        <div class="text-amber-400 font-bold border-b border-gray-800 pb-2">✈️ DAY 2 • 24 OCT 2026 (FLIGHT KF2026-D2)</div>
+        <div class="flex justify-between py-1 border-b border-gray-900"><span>10:00 - 18:00</span><span>Interactive Gates Open</span></div>
+        <div class="flex justify-between py-1 border-b border-gray-900 text-blue-400 font-bold"><span>13:00 - 15:00</span><span>Korea Talent Competition</span></div>
+        <div class="flex justify-between py-1 border-b border-gray-900 text-amber-400 font-bold"><span>18:30 - 19:00</span><span>Grand Lucky Draw Finale</span></div>
+        <div class="flex justify-between py-1 text-red-400 font-bold"><span>19:00 - 20:30</span><span>Closing Concert</span></div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>FLIGHT STATUS: ON TIME</span>
+      <span>PRE-EVENT MILESTONES COMPLETE</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 14: TARGET AUDIENCE SEGMENTATION -->
+  <!-- ========================================================= -->
+  <section id="slide-14" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 14 • TARGET AUDIENCE SEGMENTATION</span>
+      <span class="text-xs text-gray-400">DEMOGRAPHICS & ATTENDEES</span>
+    </div>
+
+    <div class="my-auto space-y-6">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-serif-title uppercase">
+        Target Audience Breakdown
+      </h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-fids">
+        <div class="bg-gray-950 p-5 rounded-2xl border border-red-500">
+          <div class="text-2xl font-bold text-red-400">45%</div>
+          <strong class="text-white text-xs block mt-1">Gen Z & K-Pop Fans</strong>
+          <p class="text-[10px] text-gray-400 mt-2">Ages 15-28. Cover Dance, TikTok creators & youth fans.</p>
+        </div>
+
+        <div class="bg-gray-950 p-5 rounded-2xl border border-blue-500">
+          <div class="text-2xl font-bold text-blue-400">25%</div>
+          <strong class="text-white text-xs block mt-1">Beauty & Lifestyle</strong>
+          <p class="text-[10px] text-gray-400 mt-2">Ages 18-35. K-Beauty skincare, personal tone & Hanbok.</p>
+        </div>
+
+        <div class="bg-gray-950 p-5 rounded-2xl border border-amber-500">
+          <div class="text-2xl font-bold text-amber-400">20%</div>
+          <strong class="text-white text-xs block mt-1">Families & Visitors</strong>
+          <p class="text-[10px] text-gray-400 mt-2">Parkson Laos shoppers, food lovers & weekend families.</p>
+        </div>
+
+        <div class="bg-gray-950 p-5 rounded-2xl border border-emerald-500">
+          <div class="text-2xl font-bold text-emerald-400">10%</div>
+          <strong class="text-white text-xs block mt-1">B2B Importers</strong>
+          <p class="text-[10px] text-gray-400 mt-2">Lao distributors & commercial trade buyers.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>SEGMENTATION STRATEGY: VERIFIED</span>
+      <span>HIGH DEMOGRAPHIC ENGAGEMENT</span>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SLIDE 15: WHY CHOOSE LAOS? STRATEGIC RATIONALE -->
+  <!-- ========================================================= -->
+  <section id="slide-15" class="slide w-full max-w-6xl h-full flex-col justify-between bg-gray-900 p-8 sm:p-12 rounded-3xl border border-gray-800 shadow-2xl">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-4 font-mono-fids">
+      <span class="text-xs text-red-400 font-bold uppercase tracking-widest">SLIDE 15 • WHY CHOOSE LAOS?</span>
+      <span class="text-xs text-gray-400">STRATEGIC RATIONALE</span>
+    </div>
+
+    <div class="my-auto space-y-6">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-serif-title uppercase">
+        Why Choose Laos? 4 Strategic Pillars
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono-fids text-xs">
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <strong class="text-red-400 block mb-1">🇱🇦 PILLAR 01: YOUNG DEMOGRAPHIC</strong>
+          <p class="text-gray-300">Over 60% of population under 30 years old with explosive K-Wave interest.</p>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <strong class="text-blue-400 block mb-1">🤝 PILLAR 02: DIPLOMATIC & KOTRA BACKING</strong>
+          <p class="text-gray-300">30+ years diplomatic relations with official KOTRA commercial backing.</p>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <strong class="text-amber-400 block mb-1">🏢 PILLAR 03: PARKSON LAOS HUB</strong>
+          <p class="text-gray-300">Vientiane's premier retail center offering high foot traffic & modern atrium.</p>
+        </div>
+
+        <div class="bg-gray-950 p-4 rounded-xl border border-gray-800">
+          <strong class="text-emerald-400 block mb-1">🚀 PILLAR 04: FIRST-MOVER ADVANTAGE</strong>
+          <p class="text-gray-300">Early brand establishment builds long-term consumer loyalty & market dominance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-gray-800 flex justify-between text-xs text-gray-400 font-mono-fids">
+      <span>END OF PRESENTATION DECK</span>
+      <span>THANK YOU • SEE YOU IN LAOS!</span>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ========================================================= -->
+<!-- BOTTOM NAVIGATION CONTROLS & THUMBNAILS -->
+<!-- ========================================================= -->
+<footer class="bg-gray-950 text-white px-6 py-3 border-t border-gray-800 flex items-center justify-between z-30 shrink-0 font-mono-fids">
+  <div class="flex items-center gap-2 text-xs text-gray-400">
+    <i data-lucide="keyboard" class="w-4 h-4 text-red-500"></i>
+    <span>Use <strong class="text-white">← Left / Right →</strong> arrow keys to navigate slides</span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <button onclick="prevSlide()" class="px-4 py-1.5 rounded-full bg-gray-900 hover:bg-gray-800 text-xs font-bold border border-gray-700 transition-colors">
+      ← Previous
+    </button>
+    <button onclick="nextSlide()" class="px-4 py-1.5 rounded-full bg-red-600 hover:bg-red-700 text-xs font-bold text-white transition-colors">
+      Next →
+    </button>
+  </div>
+</footer>
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT SLIDE NAVIGATION ENGINE -->
+<!-- ========================================================= -->
+<script>
+lucide.createIcons();
+
+let currentSlide = 1;
+const totalSlides = 15;
+
+function showSlide(index) {
+  if (index < 1) index = 1;
+  if (index > totalSlides) index = totalSlides;
+
+  // Hide all slides
+  for (let i = 1; i <= totalSlides; i++) {
+    const slide = document.getElementById(`slide-${i}`);
+    if (slide) {
+      slide.classList.remove('active');
+    }
+  }
+
+  // Show active slide
+  const activeSlide = document.getElementById(`slide-${index}`);
+  if (activeSlide) {
+    activeSlide.classList.add('active');
+  }
+
+  currentSlide = index;
+
+  // Update slide counter
+  const slideNumEl = document.getElementById('currentSlideNum');
+  if (slideNumEl) {
+    slideNumEl.textContent = currentSlide < 10 ? `0${currentSlide}` : `${currentSlide}`;
+  }
+
+  // Update progress bar
+  const progressBar = document.getElementById('progressBar');
+  if (progressBar) {
+    const pct = (currentSlide / totalSlides) * 100;
+    progressBar.style.width = `${pct}%`;
+  }
+}
+
+function nextSlide() {
+  if (currentSlide < totalSlides) {
+    showSlide(currentSlide + 1);
+  }
+}
+
+function prevSlide() {
+  if (currentSlide > 1) {
+    showSlide(currentSlide - 1);
+  }
+}
+
+// Keyboard Navigation (Left / Right Arrow Keys)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'Space') {
+    nextSlide();
+  } else if (e.key === 'ArrowLeft') {
+    prevSlide();
+  }
+});
+
+// Initialize first slide
+showSlide(1);
+</script>
+</body>
+</html>
