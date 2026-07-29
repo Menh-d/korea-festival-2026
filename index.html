@@ -30,9 +30,9 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
 .group:hover .arrow-rotate { transform: rotate(-45deg); }
 
 /* Modal Transitions */
-#deckModal, #fpModal, #dashboardModal { transition: opacity 400ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1); }
-#deckModal.hidden-modal, #fpModal.hidden-modal, #dashboardModal.hidden-modal { opacity: 0; pointer-events: none; transform: scale(0.96) translateY(20px); }
-#deckModal.visible-modal, #fpModal.visible-modal, #dashboardModal.visible-modal { opacity: 1; pointer-events: auto; transform: scale(1) translateY(0); }
+#deckModal, #fpModal, #dashboardModal, #updateGalleryModal { transition: opacity 400ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1); }
+#deckModal.hidden-modal, #fpModal.hidden-modal, #dashboardModal.hidden-modal, #updateGalleryModal.hidden-modal { opacity: 0; pointer-events: none; transform: scale(0.96) translateY(20px); }
+#deckModal.visible-modal, #fpModal.visible-modal, #dashboardModal.visible-modal, #updateGalleryModal.visible-modal { opacity: 1; pointer-events: auto; transform: scale(1) translateY(0); }
 
 /* SUBTLE & FADED MICRO APPLE LIQUID GLASS STYLING */
 .apple-liquid-glass-subtle {
@@ -398,7 +398,7 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
 <body class="bg-[#EFEFEF] text-gray-900 antialiased selection:bg-red-600 selection:text-white">
 
 <!-- ========================================================= -->
-<!-- ANIMATED PURE MASCOT CHARACTER ONLY (NO TEXT BOX OR SPEECH BUBBLE) -->
+<!-- ANIMATED PURE MASCOT CHARACTER ONLY (NO TEXT BUBBLE) -->
 <!-- ========================================================= -->
 <div id="mascotContainer" class="mascot-floating-container">
   
@@ -1192,25 +1192,34 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
 
 
   <!-- ========================================================= -->
-  <!-- SECTION 4: PARKSON LAOS REAL MALL MAP & 2D BLUEPRINT PIN CARDS -->
+  <!-- SECTION 4: PARKSON LAOS REAL MALL MAP & UPDATED FLOOR PLAN DESIGNS -->
   <!-- ========================================================= -->
   <section id="floorplan" class="bg-white py-12 lg:py-16 border-t border-gray-200/60">
     <div class="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
       
       <!-- Badge Row -->
-      <div class="flex items-center gap-2.5 mb-4">
-        <div class="w-6 h-6 rounded-full bg-red-600 text-white text-[11px] font-semibold flex items-center justify-center">3</div>
-        <span class="text-xs font-medium border border-gray-200 rounded-full px-3 py-1 text-gray-900 font-bold">Parkson Laos Shopping Mall Floor Plan Map</span>
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-6 h-6 rounded-full bg-red-600 text-white text-[11px] font-semibold flex items-center justify-center">3</div>
+          <span class="text-xs font-medium border border-gray-200 rounded-full px-3 py-1 text-gray-900 font-bold">Parkson Laos Shopping Mall Floor Plan Map</span>
+          <span class="text-[10px] bg-red-600 text-white px-2.5 py-0.5 rounded-full font-mono-fids font-bold animate-pulse">NEW 2026.07 UPDATED DESIGNS</span>
+        </div>
+
+        <!-- BUTTON TO OPEN UPDATED FLOORPLAN GALLERY MODAL -->
+        <button onclick="openUpdateGalleryModal()" class="bg-gradient-to-r from-red-600 via-amber-600 to-gray-900 hover:scale-105 text-white px-4 py-2 rounded-xl font-bold text-xs shadow-lg flex items-center gap-2 transition-transform">
+          <span class="text-sm">🖼️</span>
+          <span>VIEW ALL 11 UPDATED FLOORPLAN RENDERS →</span>
+        </button>
       </div>
 
       <!-- Heading H2 -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
         <div>
           <h2 class="text-[clamp(1.6rem,3.5vw,2.6rem)] font-medium leading-[1.12] tracking-[-0.02em] text-gray-900 max-w-3xl">
-            Parkson Laos Mall Floor Plan Map (7 Zone Layout Blueprints)
+            Parkson Laos Mall Floor Plan Map & Updated 2D/3D Renders
           </h2>
           <p class="text-xs sm:text-sm text-gray-600 mt-2 max-w-2xl">
-            Click directly on any of the 7 2D architectural blueprint cards on the Parkson Laos floor plan map to expand the full resolution 2D blueprint & 3D realistic render!
+            Updated with latest architectural floorplan design renderings (Floorplan Update 2026). Click on any blueprint pin card or view the updated gallery below!
           </p>
         </div>
 
@@ -1236,9 +1245,9 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
               <div class="text-[10px] text-gray-300">Khouvieng Road, Vientiane Laos • Ground Floor Exhibition Atrium</div>
             </div>
           </div>
-          <div class="text-[10px] bg-red-600 text-white px-3 py-1 rounded-full font-bold">
-            CLICK ANY 2D LAYOUT TO EXPAND FULL BLUEPRINT 🔍
-          </div>
+          <button onclick="openUpdateGalleryModal()" class="text-[10px] bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded-full font-bold transition-all">
+            CLICK TO VIEW 11 UPDATED RENDERS 🔍
+          </button>
         </div>
 
         <!-- PARKSON LAOS MAP CANVAS WITH EMBEDDED 2D BLUEPRINT PIN CARDS -->
@@ -1355,6 +1364,45 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
 
         </div>
 
+      </div>
+
+      <!-- UPDATED FLOORPLAN RENDERS CAROUSEL / GRID STRIP (11 NEW DESIGNS FROM USER FOLDER) -->
+      <div class="bg-gray-900 p-6 rounded-3xl border border-gray-800 text-white font-mono-fids">
+        <div class="flex items-center justify-between mb-4 border-b border-gray-800 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <strong class="text-amber-400 text-sm">✨ UPDATED FLOORPLAN RENDERS (11 DESIGNS FROM FLOORPLAN UPDATE)</strong>
+          </div>
+          <button onclick="openUpdateGalleryModal()" class="text-xs text-red-400 hover:text-white font-bold transition-colors">
+            View All 11 Fullscreen →
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+          
+          <div onclick="openUpdateGalleryModal(1)" class="aspect-video bg-gray-950 rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 cursor-pointer group transition-all">
+            <img src="assets/floorplan_update/update_01.jpg" alt="Updated Design 01" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+          </div>
+          <div onclick="openUpdateGalleryModal(2)" class="aspect-video bg-gray-950 rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 cursor-pointer group transition-all">
+            <img src="assets/floorplan_update/update_02.jpg" alt="Updated Design 02" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+          </div>
+          <div onclick="openUpdateGalleryModal(3)" class="aspect-video bg-gray-950 rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 cursor-pointer group transition-all">
+            <img src="assets/floorplan_update/update_03.jpg" alt="Updated Design 03" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+          </div>
+          <div onclick="openUpdateGalleryModal(4)" class="aspect-video bg-gray-950 rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 cursor-pointer group transition-all">
+            <img src="assets/floorplan_update/update_04.jpg" alt="Updated Design 04" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+          </div>
+          <div onclick="openUpdateGalleryModal(5)" class="aspect-video bg-gray-950 rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 cursor-pointer group transition-all">
+            <img src="assets/floorplan_update/update_05.jpg" alt="Updated Design 05" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+          </div>
+          <div onclick="openUpdateGalleryModal(6)" class="aspect-video bg-gray-950 rounded-xl overflow-hidden border border-gray-800 hover:border-red-500 cursor-pointer group transition-all relative">
+            <img src="assets/floorplan_update/update_06.jpg" alt="Updated Design 06" class="w-full h-full object-cover group-hover:scale-105 transition-transform">
+            <div class="absolute inset-0 bg-black/60 flex items-center justify-center font-bold text-xs text-white">
+              +5 MORE
+            </div>
+          </div>
+
+        </div>
       </div>
 
     </div>
@@ -2374,7 +2422,51 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
 
 
 <!-- ========================================================= -->
-<!-- JAVASCRIPT FOR CLOCK, MODALS & PURE ANIMATED MASCOT -->
+<!-- NEW UPDATED FLOORPLAN GALLERY LIGHTBOX MODAL (11 NEW RENDERS) -->
+<!-- ========================================================= -->
+<div id="updateGalleryModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl hidden-modal flex flex-col">
+  <div class="bg-gray-950 text-white px-6 py-4 flex items-center justify-between border-b border-gray-800 shrink-0 font-mono-fids">
+    <div class="flex items-center gap-3">
+      <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">NEW 2026 UPDATE</span>
+      <span class="font-bold text-base text-gray-100">Parkson Laos Updated Floorplan Design Renders (11 Designs)</span>
+    </div>
+    <button onclick="closeUpdateGalleryModal()" class="bg-gray-800 hover:bg-gray-700 text-white p-2 rounded-full transition-colors flex items-center gap-2 text-xs font-medium px-4">
+      <span>Close Gallery</span>
+      <i data-lucide="x" class="w-4 h-4"></i>
+    </button>
+  </div>
+
+  <div class="flex-1 overflow-y-auto p-6 sm:p-10 max-w-7xl mx-auto w-full space-y-6">
+    <div class="text-center max-w-2xl mx-auto mb-4">
+      <h3 id="updateGalleryTitle" class="text-2xl font-bold text-white mb-1">Updated Floorplan Design #01</h3>
+      <p class="text-xs text-gray-400 font-mono-fids">Full resolution rendering from updated floorplan package (floorplan Update)</p>
+    </div>
+
+    <!-- Active High-Res Image Display -->
+    <div class="bg-gray-900 p-4 rounded-3xl border border-gray-800 shadow-2xl flex items-center justify-center min-h-[420px]">
+      <img id="updateGalleryActiveImg" src="assets/floorplan_update/update_01.jpg" alt="Active Floorplan Render" class="max-h-[600px] w-auto object-contain rounded-2xl border border-gray-800 shadow-2xl">
+    </div>
+
+    <!-- 11 Thumbnail Selector Strip -->
+    <div class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-11 gap-2.5 pt-2">
+      <button onclick="setUpdateGalleryImage(1)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_01.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(2)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_02.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(3)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_03.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(4)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_04.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(5)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_05.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(6)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_06.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(7)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_07.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(8)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_08.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(9)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_09.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(10)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_10.jpg" class="w-full h-full object-cover"></button>
+      <button onclick="setUpdateGalleryImage(11)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_11.jpg" class="w-full h-full object-cover"></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT FOR CLOCK, MODALS, GALLERY & PURE ANIMATED MASCOT -->
 <!-- ========================================================= -->
 <script>
 // 1. Initialize Lucide Icons
@@ -2488,7 +2580,32 @@ function closeFPModal() {
   document.body.style.overflow = '';
 }
 
-// 8. PURE ANIMATED MASCOT CLICK SMOOTH SCROLL ENGINE (NO TEXT BOX)
+// 8. UPDATED FLOORPLAN GALLERY MODAL ENGINE (11 NEW RENDERS)
+function openUpdateGalleryModal(idx = 1) {
+  setUpdateGalleryImage(idx);
+  const modal = document.getElementById('updateGalleryModal');
+  modal.classList.remove('hidden-modal');
+  modal.classList.add('visible-modal');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeUpdateGalleryModal() {
+  const modal = document.getElementById('updateGalleryModal');
+  modal.classList.remove('visible-modal');
+  modal.classList.add('hidden-modal');
+  document.body.style.overflow = '';
+}
+
+function setUpdateGalleryImage(idx) {
+  const imgNum = idx < 10 ? `0${idx}` : `${idx}`;
+  const titleEl = document.getElementById('updateGalleryTitle');
+  const imgEl = document.getElementById('updateGalleryActiveImg');
+  
+  if (titleEl) titleEl.textContent = `Updated Floorplan Design #${imgNum} (2026.07 Update)`;
+  if (imgEl) imgEl.src = `assets/floorplan_update/update_${imgNum}.jpg`;
+}
+
+// 9. PURE ANIMATED MASCOT CLICK SMOOTH SCROLL ENGINE (NO TEXT BOX)
 const mascotSectionTargets = ['#hero-section', '#concept', '#zones', '#floorplan', '#marketing', '#agenda', '#target-laos'];
 let currentTargetIdx = 0;
 
@@ -2512,6 +2629,7 @@ document.addEventListener('keydown', (e) => {
     closeDeckModal();
     closeFPModal();
     closeDashboardModal();
+    closeUpdateGalleryModal();
   }
 });
 </script>
