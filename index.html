@@ -290,13 +290,36 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
   box-shadow: 0 18px 36px rgba(239, 68, 68, 0.5), 0 0 25px rgba(255, 214, 0, 0.4);
 }
 
-/* PARKSON LAOS MAP BOARD & EMBEDDED UPDATED FLOOR PLAN PIN CARDS */
+/* MULTI-ZONE (ZONE A, ZONE B, ZONE C) FLOOR PLAN BOARD STYLING */
 .parkson-map-board {
   background: #0F172A;
   border: 3px solid #E74C3C;
   border-radius: 28px;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
   position: relative;
+}
+
+.zone-tab-btn {
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.zone-tab-btn.active-zone-a {
+  background: linear-gradient(135deg, #EF4444 0%, #B91C1C 100%);
+  color: #FFFFFF;
+  border-color: #F87171;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+}
+.zone-tab-btn.active-zone-b {
+  background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+  color: #FFFFFF;
+  border-color: #60A5FA;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+.zone-tab-btn.active-zone-c {
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  color: #FFFFFF;
+  border-color: #FBBF24;
+  box-shadow: 0 8px 20px rgba(217, 119, 6, 0.4);
 }
 
 .map-blueprint-pin-card {
@@ -307,10 +330,10 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
   transition: transform 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 300ms ease, border-color 300ms ease;
   cursor: pointer;
-  width: 110px;
+  width: 115px;
 }
 @media (min-width: 640px) {
-  .map-blueprint-pin-card { width: 135px; padding: 5px; }
+  .map-blueprint-pin-card { width: 140px; padding: 5px; }
 }
 .map-blueprint-pin-card:hover {
   transform: scale(1.18) translateY(-6px);
@@ -453,7 +476,7 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
         <a href="#overview" class="hover:text-red-600 transition-colors duration-300">Overview</a>
         <a href="#concept" class="hover:text-red-600 transition-colors duration-300">Desks</a>
         <a href="#zones" class="hover:text-red-600 transition-colors duration-300">7 Gates</a>
-        <a href="#floorplan" class="hover:text-red-600 transition-colors duration-300">Parkson Map</a>
+        <a href="#floorplan" class="hover:text-red-600 transition-colors duration-300">Zones A-B-C Map</a>
         <a href="#marketing" class="hover:text-red-600 transition-colors duration-300">Wayfinding Plan</a>
         <a href="#agenda" class="hover:text-red-600 transition-colors duration-300">Agenda</a>
         <a href="#target-laos" class="hover:text-red-600 transition-colors duration-300">Why Laos</a>
@@ -508,7 +531,7 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
       <a href="#ticket" onclick="toggleMobileMenu()">Boarding Pass Ticket</a>
       <a href="#concept" onclick="toggleMobileMenu()">Check-In Desks 01-03</a>
       <a href="#zones" onclick="toggleMobileMenu()">7 E-Gate Scanners</a>
-      <a href="#floorplan" onclick="toggleMobileMenu()">Parkson Laos Map</a>
+      <a href="#floorplan" onclick="toggleMobileMenu()">Parkson Zones A-B-C Map</a>
       <a href="#marketing" onclick="toggleMobileMenu()">Wayfinding Marketing Plan</a>
       <a href="#agenda" onclick="toggleMobileMenu()">Flight Agenda</a>
       <a href="#target-laos" onclick="toggleMobileMenu()">Why Choose Laos</a>
@@ -1139,200 +1162,80 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
     </div>
   </section>
 
-  <!-- SECTION 4: PARKSON LAOS MAIN MAP EMBEDDED WITH ALL 11 UPDATED FLOORPLAN RENDERS -->
+  <!-- SECTION 4: PARKSON LAOS MULTI-ZONE (ZONE A, ZONE B, ZONE C) FLOOR PLAN BOARD -->
   <section id="floorplan" class="bg-white py-12 lg:py-16 border-t border-gray-200/60">
     <div class="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
       
       <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
         <div class="flex items-center gap-2.5">
           <div class="w-6 h-6 rounded-full bg-red-600 text-white text-[11px] font-semibold flex items-center justify-center">3</div>
-          <span class="text-xs font-medium border border-gray-200 rounded-full px-3 py-1 text-gray-900 font-bold">Parkson Laos Shopping Mall Interactive Floor Plan Map</span>
-          <span class="text-[10px] bg-red-600 text-white px-2.5 py-0.5 rounded-full font-mono-fids font-bold animate-pulse">EMBEDDED WITH 11 UPDATED RENDERS</span>
+          <span class="text-xs font-medium border border-gray-200 rounded-full px-3 py-1 text-gray-900 font-bold">Parkson Laos Shopping Mall Multi-Zone Floor Plan Map</span>
+          <span class="text-[10px] bg-red-600 text-white px-2.5 py-0.5 rounded-full font-mono-fids font-bold animate-pulse">STRUCTURED INTO ZONE A, ZONE B & ZONE C</span>
         </div>
 
-        <button onclick="openUpdateGalleryModal()" class="bg-gradient-to-r from-red-600 via-amber-600 to-gray-900 hover:scale-105 text-white px-4 py-2 rounded-xl font-bold text-xs shadow-lg flex items-center gap-2 transition-transform">
+        <button onclick="openZoneGalleryModal()" class="bg-gradient-to-r from-red-600 via-amber-600 to-gray-900 hover:scale-105 text-white px-4 py-2 rounded-xl font-bold text-xs shadow-lg flex items-center gap-2 transition-transform">
           <span class="text-sm">🔍</span>
-          <span>FULLSCREEN 11 RENDERS LIGHTBOX →</span>
+          <span>FULLSCREEN ALL ZONES A-B-C RENDERS →</span>
         </button>
       </div>
 
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
         <div>
           <h2 class="text-[clamp(1.6rem,3.5vw,2.6rem)] font-medium leading-[1.12] tracking-[-0.02em] text-gray-900 max-w-3xl">
-            Parkson Laos Mall Floor Plan Map (11 Updated Design Pins)
+            Parkson Laos Multi-Zone Floor Plan (Zone A, Zone B & Zone C)
           </h2>
           <p class="text-xs sm:text-sm text-gray-600 mt-2 max-w-2xl">
-            The 11 new updated floorplan design renders from the updated package are now embedded directly onto the Parkson Laos Mall Map layout below! Click any pin card to open in high-res full screen.
+            Re-architected into 3 distinct zones based on the updated layout hierarchy: <strong>Zone A</strong> (Entrance & Main Atrium), <strong>Zone B</strong> (Exhibition Hall & Booths), and <strong>Zone C</strong> (Main Stage & K-Food Street). Click tabs to switch zones!
           </p>
         </div>
 
-        <button onclick="openUpdateGalleryModal(1)" class="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-700 hover:to-amber-700 text-white px-5 py-3 rounded-2xl font-bold text-xs shadow-lg flex items-center gap-2.5 transition-transform hover:scale-105 shrink-0">
-          <span class="text-base">🗺️</span>
-          <div class="text-left font-mono-fids">
-            <div class="text-[9px] text-amber-200 uppercase tracking-widest">INTERACTIVE MAP LAYOUT</div>
-            <div>EXPAND ALL 11 RENDERS →</div>
-          </div>
-        </button>
+        <!-- ZONE SWITCHER TABS -->
+        <div class="flex items-center gap-2 bg-gray-900 p-1.5 rounded-2xl border border-gray-800 shrink-0 font-mono-fids text-xs">
+          <button id="tabZoneA" onclick="switchFloorplanZone('A')" class="zone-tab-btn px-4 py-2 rounded-xl font-bold active-zone-a flex items-center gap-1.5">
+            <span>🏢</span>
+            <span>ZONE A (ENTRANCE)</span>
+          </button>
+
+          <button id="tabZoneB" onclick="switchFloorplanZone('B')" class="zone-tab-btn px-4 py-2 rounded-xl font-bold text-gray-400 hover:text-white flex items-center gap-1.5">
+            <span>🛍️</span>
+            <span>ZONE B (BOOTHS)</span>
+          </button>
+
+          <button id="tabZoneC" onclick="switchFloorplanZone('C')" class="zone-tab-btn px-4 py-2 rounded-xl font-bold text-gray-400 hover:text-white flex items-center gap-1.5">
+            <span>🎪</span>
+            <span>ZONE C (STAGE & FOOD)</span>
+          </button>
+        </div>
       </div>
 
+      <!-- MAIN MULTI-ZONE DISPLAY BOARD -->
       <div class="parkson-map-board p-4 sm:p-7 mb-8 relative overflow-hidden">
         
         <div class="bg-gray-950 text-white p-3.5 sm:p-4 rounded-2xl mb-5 flex flex-wrap items-center justify-between gap-3 font-mono-fids border border-gray-800 shadow-xl">
           <div class="flex items-center gap-2.5">
-            <span class="text-2xl">🏢</span>
+            <span id="zoneDisplayIcon" class="text-2xl">🏢</span>
             <div>
-              <div class="text-[11px] font-bold text-amber-400 uppercase tracking-widest">PARKSON LAOS SHOPPING CENTER — MAIN MAP WITH 11 UPDATED RENDERS</div>
-              <div class="text-[10px] text-gray-300">Khouvieng Road, Vientiane Laos • Ground Floor Exhibition Atrium</div>
+              <div id="zoneDisplayTitle" class="text-[11px] font-bold text-amber-400 uppercase tracking-widest">
+                PARKSON LAOS — ZONE A: ENTRANCE LOBBY & MAIN ATRIUM
+              </div>
+              <div id="zoneDisplaySubtitle" class="text-[10px] text-gray-300">
+                Ground Floor Arrival Gate, Passport Check-In Counter, & K-Beauty Promenade
+              </div>
             </div>
           </div>
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span class="text-[10px] text-emerald-400 font-bold">11 PINS EMBEDDED LIVE ON MAP</span>
+            <span id="zoneDisplayBadge" class="text-[10px] text-emerald-400 font-bold">ZONE A ACTIVE • 7 PIN CARDS EMBEDDED</span>
           </div>
         </div>
 
         <div class="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-[#090D16] rounded-2xl border-2 border-red-500/50 p-4 sm:p-6 overflow-hidden shadow-inner flex flex-col justify-between">
           
-          <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1000 625" preserveAspectRatio="none">
-            <rect x="20" y="20" width="960" height="585" rx="24" fill="#0F172A" stroke="#1E293B" stroke-width="4" />
-            <polygon points="120,100 880,100 920,520 80,520" fill="#1E293B" stroke="#334155" stroke-width="3" opacity="0.7" />
-            <line x1="80" y1="310" x2="920" y2="310" stroke="#E74C3C" stroke-width="6" opacity="0.6" />
-            <line x1="80" y1="310" x2="920" y2="310" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 6" opacity="0.8" />
-            <line x1="500" y1="100" x2="500" y2="520" stroke="#E74C3C" stroke-width="6" opacity="0.6" />
-            <line x1="500" y1="100" x2="500" y2="520" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="8 6" opacity="0.8" />
-            <text x="500" y="65" text-anchor="middle" fill="#F8FAFC" font-size="16" font-weight="bold" font-family="monospace">PARKSON LAOS — MAIN EXHIBITION HALL & ATRIUM</text>
-          </svg>
+          <!-- MASTER ZONE BLUEPRINT BACKGROUND IMAGE -->
+          <img id="zoneMasterBlueprintImg" src="assets/floorplan_zones/zone_a/Main A.png" alt="Zone Master Blueprint" class="absolute inset-0 w-full h-full object-contain p-2 opacity-80">
 
-          <div class="relative z-20 w-full h-full min-h-[440px] sm:min-h-[520px]">
-            
-            <div onclick="openUpdateGalleryModal(1)" class="map-blueprint-pin-card absolute top-[4%] left-[4%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">1</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #01</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_01.jpg" alt="Updated Design 01" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">1. Design Render #01</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(2)" class="map-blueprint-pin-card absolute top-[4%] left-[28%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">2</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #02</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_02.jpg" alt="Updated Design 02" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">2. Design Render #02</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(3)" class="map-blueprint-pin-card absolute top-[4%] left-[52%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">3</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #03</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_03.jpg" alt="Updated Design 03" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">3. Design Render #03</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(4)" class="map-blueprint-pin-card absolute top-[4%] left-[76%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">4</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #04</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_04.jpg" alt="Updated Design 04" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">4. Design Render #04</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(5)" class="map-blueprint-pin-card absolute top-[36%] left-[10%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">5</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #05</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_05.jpg" alt="Updated Design 05" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">5. Design Render #05</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(6)" class="map-blueprint-pin-card absolute top-[36%] left-[40%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">6</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #06</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_06.jpg" alt="Updated Design 06" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">6. Design Render #06</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(7)" class="map-blueprint-pin-card absolute top-[36%] left-[70%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">7</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #07</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_07.jpg" alt="Updated Design 07" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">7. Design Render #07</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(8)" class="map-blueprint-pin-card absolute top-[68%] left-[4%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">8</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #08</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_08.jpg" alt="Updated Design 08" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">8. Design Render #08</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(9)" class="map-blueprint-pin-card absolute top-[68%] left-[28%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">9</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #09</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_09.jpg" alt="Updated Design 09" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">9. Design Render #09</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(10)" class="map-blueprint-pin-card absolute top-[68%] left-[52%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">10</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #10</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_10.jpg" alt="Updated Design 10" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">10. Design Render #10</div>
-            </div>
-
-            <div onclick="openUpdateGalleryModal(11)" class="map-blueprint-pin-card absolute top-[68%] left-[76%] z-30 group">
-              <div class="flex items-center justify-between mb-1">
-                <span class="pin-num-badge">11</span>
-                <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">UPDATE #11</span>
-              </div>
-              <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
-                <img src="assets/floorplan_update/update_11.jpg" alt="Updated Design 11" class="w-full h-full object-cover">
-              </div>
-              <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">11. Design Render #11</div>
-            </div>
-
-            <div class="absolute bottom-2 left-2 bg-gray-950/95 backdrop-blur-md p-3 rounded-xl border border-red-500/40 shadow-xl font-mono-fids text-[10px] text-gray-300 hidden md:block">
-              <div class="font-bold text-amber-400 mb-0.5">
-                📍 11 Updated Floorplan Designs Embedded Directly on Main Map:
-              </div>
-              <div>Click on any pin card above to expand and view in full-screen lightbox!</div>
-            </div>
-
+          <div id="zonePinsContainer" class="relative z-20 w-full h-full min-h-[440px] sm:min-h-[520px]">
+            <!-- Dynamic Zone Pins will be injected by JavaScript -->
           </div>
 
         </div>
@@ -1343,12 +1246,12 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
         <div class="flex items-center gap-3">
           <span class="text-xl">✨</span>
           <div>
-            <strong class="text-amber-400 text-sm block">11 UPDATED RENDERS INTEGRATED ON MAIN MAP</strong>
-            <span class="text-gray-400 text-xs">Full architectural renders updated on Parkson Laos floor plan map.</span>
+            <strong class="text-amber-400 text-sm block">ZONE A, ZONE B & ZONE C FLOORPLAN LAYOUT ACTIVE</strong>
+            <span class="text-gray-400 text-xs">Architectural master blueprints and render details sorted by Zone sequence.</span>
           </div>
         </div>
-        <button onclick="openFPModal(1)" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-700 transition-colors">
-          View 2D CAD Blueprints →
+        <button onclick="openZoneGalleryModal()" class="bg-gradient-to-r from-red-600 to-amber-600 hover:scale-105 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md transition-transform">
+          Fullscreen All Zone Renders →
         </button>
       </div>
 
@@ -2146,77 +2049,31 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
   </div>
 </div>
 
-<!-- FLOOR PLAN EXPANDED LIGHTBOX MODAL -->
-<div id="fpModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl hidden-modal flex flex-col">
-  <div class="bg-gray-900 text-white px-6 py-3.5 flex items-center justify-between border-b border-gray-800 shrink-0">
-    <div class="flex items-center gap-3">
-      <span id="fpModalTag" class="bg-red-600 text-white text-xs font-mono-fids font-bold px-3 py-1 rounded-full">PIN 01</span>
-      <span id="fpModalTitle" class="font-bold text-base text-gray-100">Master Floor Plan Architectural Blueprint</span>
-    </div>
-    <button onclick="closeFPModal()" class="bg-gray-800 hover:bg-gray-700 text-white p-2 rounded-full transition-colors flex items-center gap-2 text-xs font-medium px-4">
-      <span>Close Preview</span>
-      <i data-lucide="x" class="w-4 h-4"></i>
-    </button>
-  </div>
-
-  <div class="flex-1 overflow-y-auto p-6 sm:p-10 max-w-7xl mx-auto w-full flex flex-col justify-center">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
-      <div class="bg-gray-950 p-4 rounded-3xl border border-gray-800 shadow-2xl flex flex-col justify-between">
-        <div class="flex items-center justify-between text-xs text-orange-400 font-mono-fids font-bold mb-3 border-b border-gray-800 pb-2">
-          <span>📐 ORIGINAL 2D ARCHITECTURAL BLUEPRINT</span>
-          <span>LAYOUT #01–07</span>
-        </div>
-        <img id="fpModal2DImg" src="assets/fp_2d_01.png" alt="2D Architectural Blueprint" class="w-full h-auto max-h-[480px] object-contain rounded-2xl border border-gray-800">
-        <div class="mt-3 text-xs text-gray-400 font-mono-fids">Original vector CAD blueprint from Floorplan folder.</div>
-      </div>
-
-      <div class="bg-gray-950 p-4 rounded-3xl border border-gray-800 shadow-2xl flex flex-col justify-between">
-        <div class="flex items-center justify-between text-xs text-emerald-400 font-mono-fids font-bold mb-3 border-b border-gray-800 pb-2">
-          <span>🏢 REALISTIC 3D SPATIAL ARCHITECTURAL RENDER</span>
-          <span>HIGH-RES RENDER</span>
-        </div>
-        <img id="fpModal3DImg" src="assets/fp_3d_01.jpg" alt="3D Spatial Render" class="w-full h-auto max-h-[480px] object-contain rounded-2xl border border-gray-800">
-        <div class="mt-3 text-xs text-gray-400 font-mono-fids">Hyper-realistic 8K 3D spatial simulation render.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- UPDATED FLOORPLAN GALLERY LIGHTBOX MODAL (11 RENDERS) -->
+<!-- MULTI-ZONE (ZONE A, B, C) GALLERY LIGHTBOX MODAL -->
 <div id="updateGalleryModal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl hidden-modal flex flex-col">
   <div class="bg-gray-950 text-white px-6 py-4 flex items-center justify-between border-b border-gray-800 shrink-0 font-mono-fids">
     <div class="flex items-center gap-3">
-      <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">NEW 2026 UPDATE</span>
-      <span class="font-bold text-base text-gray-100">Parkson Laos Updated Floorplan Design Renders (11 Designs)</span>
+      <span id="zoneModalBadge" class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">ZONE A RENDERS</span>
+      <span id="zoneModalTitle" class="font-bold text-base text-gray-100">Parkson Laos Floor Plan Architectural Renders</span>
     </div>
-    <button onclick="closeUpdateGalleryModal()" class="bg-gray-800 hover:bg-gray-700 text-white p-2 rounded-full transition-colors flex items-center gap-2 text-xs font-medium px-4">
+    <button onclick="closeZoneGalleryModal()" class="bg-gray-800 hover:bg-gray-700 text-white p-2 rounded-full transition-colors flex items-center gap-2 text-xs font-medium px-4">
       <span>Close Gallery</span>
       <i data-lucide="x" class="w-4 h-4"></i>
     </button>
   </div>
 
   <div class="flex-1 overflow-y-auto p-6 sm:p-10 max-w-7xl mx-auto w-full space-y-6">
-    <div class="text-center max-w-2xl mx-auto mb-4">
-      <h3 id="updateGalleryTitle" class="text-2xl font-bold text-white mb-1">Updated Floorplan Design #01</h3>
-      <p class="text-xs text-gray-400 font-mono-fids">Full resolution rendering from updated floorplan package (floorplan Update)</p>
+    <div class="text-center max-w-2xl mx-auto mb-2">
+      <h3 id="zoneGalleryActiveTitle" class="text-2xl font-bold text-white mb-1">Zone Render #01</h3>
+      <p id="zoneGalleryActiveSub" class="text-xs text-gray-400 font-mono-fids">High resolution spatial rendering</p>
     </div>
 
     <div class="bg-gray-900 p-4 rounded-3xl border border-gray-800 shadow-2xl flex items-center justify-center min-h-[420px]">
-      <img id="updateGalleryActiveImg" src="assets/floorplan_update/update_01.jpg" alt="Active Floorplan Render" class="max-h-[600px] w-auto object-contain rounded-2xl border border-gray-800 shadow-2xl">
+      <img id="zoneGalleryActiveImg" src="assets/floorplan_zones/zone_a/01.png" alt="Active Zone Render" class="max-h-[600px] w-auto object-contain rounded-2xl border border-gray-800 shadow-2xl">
     </div>
 
-    <div class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-11 gap-2.5 pt-2">
-      <button onclick="setUpdateGalleryImage(1)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_01.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(2)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_02.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(3)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_03.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(4)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_04.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(5)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_05.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(6)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_06.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(7)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_07.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(8)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_08.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(9)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_09.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(10)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_10.jpg" class="w-full h-full object-cover"></button>
-      <button onclick="setUpdateGalleryImage(11)" class="aspect-video bg-gray-900 rounded-lg overflow-hidden border-2 border-gray-800 hover:border-red-500 focus:outline-none"><img src="assets/floorplan_update/update_11.jpg" class="w-full h-full object-cover"></button>
+    <div id="zoneGalleryThumbsContainer" class="flex flex-wrap items-center justify-center gap-3 pt-2">
+      <!-- Dynamic Zone Thumbnails -->
     </div>
   </div>
 </div>
@@ -2336,60 +2193,133 @@ function closeDashboardModal() {
   document.body.style.overflow = '';
 }
 
-const fpData = {
-  1: { tag: 'PIN 1 • MASTER 2D OVERALL', title: 'Master Overall 2D Floor Plan & Spatial Layout (Parkson Laos)', img2D: 'assets/fp_2d_01.png', img3D: 'assets/fp_3d_01.jpg', desc: 'Master overall 2D floor plan layout showing Parkson Laos ground floor exhibition hall, booth zones A to F, entrance arch, and main stage.' },
-  2: { tag: 'PIN 2 • ENTRANCE ARCH', title: 'Arrival Arch & Check-In Portal Layout', img2D: 'assets/fp_2d_02.png', img3D: 'assets/fp_3d_02.jpg', desc: 'Illuminated airport-inspired arrival gate structure, passport check-in desk layout & visitor queuing lines.' },
-  3: { tag: 'PIN 3 • K-BEAUTY PROMENADE', title: 'Myeongdong K-Beauty Promenade Layout', img2D: 'assets/fp_2d_03.png', img3D: 'assets/fp_3d_03.jpg', desc: 'Skincare testing counters, personal tone matching station, and brand showcase booth spatial specifications.' },
-  4: { tag: 'PIN 4 • DIY CRAFT STUDIO', title: 'Han-geul Calligraphy & DIY Studio Layout', img2D: 'assets/fp_2d_04.png', img3D: 'assets/fp_3d_04.jpg', desc: 'Workshop tables layout for Han-geul calligraphy writing, K-Pop photocard DIY, and keychain crafting.' },
-  5: { tag: 'PIN 5 • HANBOK LOUNGE', title: 'Hanbok Rental & Palace Studio Layout', img2D: 'assets/fp_2d_05.png', img3D: 'assets/fp_3d_05.jpg', desc: 'Traditional silk Hanbok fitting dressing rooms & Gyeongbokgung palace photo backdrop studio.' },
-  6: { tag: 'PIN 6 • MAIN STAGE', title: 'Gwanghwamun Main Stage Arena Layout', img2D: 'assets/fp_2d_06.png', img3D: 'assets/fp_3d_06.jpg', desc: 'K-Pop Cover Dance & Talent Competition main stage, sound/lighting truss rig, and audience seating area.' },
-  7: { tag: 'PIN 7 • K-FOOD MARKET', title: 'Authentic K-Food Duty Free Market Layout', img2D: 'assets/fp_2d_07.png', img3D: 'assets/fp_3d_07.jpg', desc: 'Tteokbokki food stall modules, live cooking demonstration stage, and seating dining tables layout.' }
+/* MULTI-ZONE (ZONE A, ZONE B, ZONE C) FLOORPLAN DATA & INTERACTIVE LOGIC */
+const zoneFloorplans = {
+  'A': {
+    name: 'ZONE A: ENTRANCE LOBBY & MAIN ATRIUM',
+    sub: 'Ground Floor Arrival Gate, Passport Check-In Counter, & K-Beauty Promenade',
+    masterImg: 'assets/floorplan_zones/zone_a/Main A.png',
+    badge: 'ZONE A ACTIVE • 6 SUB-RENDERS EMBEDDED',
+    pins: [
+      { id: 1, title: '01. Arrival Gate Arch', img: 'assets/floorplan_zones/zone_a/01.png', top: '8%', left: '6%' },
+      { id: 2, title: '02. Passport Desk', img: 'assets/floorplan_zones/zone_a/02.png', top: '8%', left: '36%' },
+      { id: 3, title: '03. K-Beauty Testing', img: 'assets/floorplan_zones/zone_a/03.png', top: '8%', left: '66%' },
+      { id: 4, title: '04. DIY Craft Workshop', img: 'assets/floorplan_zones/zone_a/04.png', top: '56%', left: '6%' },
+      { id: 5, title: '05. Hanbok Studio', img: 'assets/floorplan_zones/zone_a/05.png', top: '56%', left: '36%' },
+      { id: 6, title: '07. K-Food Stall Module', img: 'assets/floorplan_zones/zone_a/07.png', top: '56%', left: '66%' }
+    ]
+  },
+  'B': {
+    name: 'ZONE B: EXHIBITION HALL & INTERACTIVE BOOTHS',
+    sub: 'Middle Exhibition Hall, Corporate Sponsor Booths & Media Experience',
+    masterImg: 'assets/floorplan_zones/zone_b/Main B.jpeg',
+    badge: 'ZONE B ACTIVE • 4 SUB-RENDERS EMBEDDED',
+    pins: [
+      { id: 1, title: 'B1. Skincare Consultations', img: 'assets/floorplan_zones/zone_b/B00001.jpeg', top: '10%', left: '10%' },
+      { id: 2, title: 'B2. Sponsor Booths', img: 'assets/floorplan_zones/zone_b/B00002.jpeg', top: '10%', left: '55%' },
+      { id: 3, title: 'B3. Calligraphy Corner', img: 'assets/floorplan_zones/zone_b/B00003.jpeg', top: '55%', left: '10%' },
+      { id: 4, title: 'B4. Media Tech Station', img: 'assets/floorplan_zones/zone_b/B00004.jpeg', top: '55%', left: '55%' }
+    ]
+  },
+  'C': {
+    name: 'ZONE C: MAIN STAGE & K-FOOD NIGHT MARKET',
+    sub: 'Gwanghwamun Main Stage, Cover Dance Arena, K-Food Promenade & Lucky Draw',
+    masterImg: 'assets/floorplan_zones/zone_c/Main C.jpeg',
+    badge: 'ZONE C ACTIVE • 4 SUB-RENDERS EMBEDDED',
+    pins: [
+      { id: 1, title: 'C1. Main Stage Arena', img: 'assets/floorplan_zones/zone_c/C00001.jpeg', top: '10%', left: '10%' },
+      { id: 2, title: 'C2. Cover Dance Stage', img: 'assets/floorplan_zones/zone_c/C00002.jpeg', top: '10%', left: '55%' },
+      { id: 3, title: 'C3. Cooking Show & Stalls', img: 'assets/floorplan_zones/zone_c/C00003.jpeg', top: '55%', left: '10%' },
+      { id: 4, title: 'C4. Lucky Draw & Awards', img: 'assets/floorplan_zones/zone_c/C00004.jpeg', top: '55%', left: '55%' }
+    ]
+  }
 };
 
-function openFPModal(pointId) {
-  const data = fpData[pointId];
-  if (!data) return;
+let currentZoneKey = 'A';
 
-  document.getElementById('fpModalTag').textContent = data.tag;
-  document.getElementById('fpModalTitle').textContent = data.title;
-  document.getElementById('fpModal2DImg').src = data.img2D;
-  document.getElementById('fpModal3DImg').src = data.img3D;
+function switchFloorplanZone(zoneKey) {
+  currentZoneKey = zoneKey;
+  const zData = zoneFloorplans[zoneKey];
+  if (!zData) return;
 
-  const modal = document.getElementById('fpModal');
-  modal.classList.remove('hidden-modal');
-  modal.classList.add('visible-modal');
-  document.body.style.overflow = 'hidden';
+  // Update tabs styling
+  const tabA = document.getElementById('tabZoneA');
+  const tabB = document.getElementById('tabZoneB');
+  const tabC = document.getElementById('tabZoneC');
+
+  tabA.className = 'zone-tab-btn px-4 py-2 rounded-xl font-bold ' + (zoneKey === 'A' ? 'active-zone-a' : 'text-gray-400 hover:text-white');
+  tabB.className = 'zone-tab-btn px-4 py-2 rounded-xl font-bold ' + (zoneKey === 'B' ? 'active-zone-b' : 'text-gray-400 hover:text-white');
+  tabC.className = 'zone-tab-btn px-4 py-2 rounded-xl font-bold ' + (zoneKey === 'C' ? 'active-zone-c' : 'text-gray-400 hover:text-white');
+
+  // Update header text & master image
+  document.getElementById('zoneDisplayIcon').textContent = zoneKey === 'A' ? '🏢' : (zoneKey === 'B' ? '🛍️' : '🎪');
+  document.getElementById('zoneDisplayTitle').textContent = `PARKSON LAOS — ${zData.name}`;
+  document.getElementById('zoneDisplaySubtitle').textContent = zData.sub;
+  document.getElementById('zoneDisplayBadge').textContent = zData.badge;
+  document.getElementById('zoneMasterBlueprintImg').src = zData.masterImg;
+
+  // Render pin cards
+  const pinsContainer = document.getElementById('zonePinsContainer');
+  let htmlPins = '';
+
+  zData.pins.forEach((pin, index) => {
+    htmlPins += `
+      <div onclick="openZoneGalleryModal('${zoneKey}', ${index})" class="map-blueprint-pin-card absolute z-30 group" style="top: ${pin.top}; left: ${pin.left};">
+        <div class="flex items-center justify-between mb-1">
+          <span class="pin-num-badge">${pin.id}</span>
+          <span class="text-[7px] sm:text-[8px] font-mono-fids font-bold text-red-600 uppercase">ZONE ${zoneKey}</span>
+        </div>
+        <div class="aspect-video bg-gray-950 rounded-lg overflow-hidden border border-gray-300">
+          <img src="${pin.img}" alt="${pin.title}" class="w-full h-full object-cover">
+        </div>
+        <div class="text-[8px] sm:text-[9px] font-bold text-gray-900 mt-1 truncate">${pin.title}</div>
+      </div>
+    `;
+  });
+
+  pinsContainer.innerHTML = htmlPins;
 }
 
-function closeFPModal() {
-  const modal = document.getElementById('fpModal');
-  modal.classList.remove('visible-modal');
-  modal.classList.add('hidden-modal');
-  document.body.style.overflow = '';
-}
-
-function openUpdateGalleryModal(idx = 1) {
-  setUpdateGalleryImage(idx);
+function openZoneGalleryModal(zoneKey = currentZoneKey, activeIdx = 0) {
+  setZoneGalleryImage(zoneKey, activeIdx);
   const modal = document.getElementById('updateGalleryModal');
   modal.classList.remove('hidden-modal');
   modal.classList.add('visible-modal');
   document.body.style.overflow = 'hidden';
 }
 
-function closeUpdateGalleryModal() {
+function closeZoneGalleryModal() {
   const modal = document.getElementById('updateGalleryModal');
   modal.classList.remove('visible-modal');
   modal.classList.add('hidden-modal');
   document.body.style.overflow = '';
 }
 
-function setUpdateGalleryImage(idx) {
-  const imgNum = idx < 10 ? `0${idx}` : `${idx}`;
-  const titleEl = document.getElementById('updateGalleryTitle');
-  const imgEl = document.getElementById('updateGalleryActiveImg');
-  
-  if (titleEl) titleEl.textContent = `Updated Floorplan Design #${imgNum} (2026.07 Update)`;
-  if (imgEl) imgEl.src = `assets/floorplan_update/update_${imgNum}.jpg`;
+function setZoneGalleryImage(zoneKey, idx) {
+  const zData = zoneFloorplans[zoneKey];
+  if (!zData || !zData.pins[idx]) return;
+
+  const pin = zData.pins[idx];
+  document.getElementById('zoneModalBadge').textContent = `ZONE ${zoneKey} RENDERS`;
+  document.getElementById('zoneModalTitle').textContent = `Parkson Laos ${zData.name}`;
+  document.getElementById('zoneGalleryActiveTitle').textContent = pin.title;
+  document.getElementById('zoneGalleryActiveSub').textContent = `Sub-area render detail from ${zData.name}`;
+  document.getElementById('zoneGalleryActiveImg').src = pin.img;
+
+  // Build thumbnails
+  const thumbsContainer = document.getElementById('zoneGalleryThumbsContainer');
+  let thumbsHtml = '';
+
+  zData.pins.forEach((p, i) => {
+    const isSelected = i === idx;
+    thumbsHtml += `
+      <button onclick="setZoneGalleryImage('${zoneKey}', ${i})" class="aspect-video w-24 bg-gray-900 rounded-lg overflow-hidden border-2 ${isSelected ? 'border-red-500 scale-105' : 'border-gray-800 hover:border-red-500'} focus:outline-none transition-transform">
+        <img src="${p.img}" class="w-full h-full object-cover">
+      </button>
+    `;
+  });
+
+  thumbsContainer.innerHTML = thumbsHtml;
 }
 
 function openPassportModal() {
@@ -2423,12 +2353,15 @@ function triggerMascotClickAnimation() {
   }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  switchFloorplanZone('A');
+});
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeDeckModal();
-    closeFPModal();
     closeDashboardModal();
-    closeUpdateGalleryModal();
+    closeZoneGalleryModal();
     closePassportModal();
   }
 });
