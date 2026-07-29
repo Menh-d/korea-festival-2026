@@ -264,25 +264,14 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
   100% { top: 0%; opacity: 0.2; }
 }
 
-/* FLOATING PASSPORT BADGE OVERLAY ON GATE 01 */
-.passport-floating-badge {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  z-index: 30;
-  background: rgba(15, 23, 42, 0.92);
-  backdrop-filter: blur(12px);
+/* REAL PASSPORT BOOKLET IMAGE DISPLAY ON GATE 01 */
+.passport-real-display-box {
+  background: linear-gradient(135deg, #0B1120 0%, #1E293B 100%);
+  border-radius: 20px;
+  padding: 16px;
   border: 2px solid #EF4444;
-  border-radius: 16px;
-  padding: 8px 12px;
-  box-shadow: 0 12px 24px rgba(0,0,0,0.4), 0 0 15px rgba(239, 68, 68, 0.4);
-  cursor: pointer;
-  transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.passport-floating-badge:hover {
-  transform: scale(1.08) translateY(-4px);
-  border-color: #FFD600;
-  box-shadow: 0 18px 36px rgba(239, 68, 68, 0.6);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 25px rgba(239, 68, 68, 0.25);
+  position: relative;
 }
 
 /* PARKSON LAOS MAP BOARD & EMBEDDED UPDATED FLOOR PLAN PIN CARDS */
@@ -687,7 +676,7 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
         <span class="text-xs font-medium border border-gray-200 rounded-full px-3 py-1 text-gray-900 font-bold">Airport Terminal Check-In Desks</span>
       </div>
 
-      <h2 class="text-[clamp(1.6rem,3.5vw,2.6rem)] font-medium leading-[1.12] tracking-[-0.02em] text-gray-900 mb-4 max-w-3xl">
+      <h2 class="text-[clamp(1.6rem,3.5vw,2.6rem)] font-medium leading-[1.12] tracking-[-0.03em] text-gray-900 mb-4 max-w-3xl">
         Airport Terminal Check-In Counter Desks (Steps 01 — 03)
       </h2>
 
@@ -831,7 +820,7 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
     </div>
   </section>
 
-  <!-- SECTION 3: ALL 7 TERMINAL GATES (WITH FLOATING PASSPORT POPUP ON GATE 01) -->
+  <!-- SECTION 3: ALL 7 TERMINAL GATES (GATE 01 SHOWCASES REAL PASSPORT BOOKLET IMAGE DIRECTLY) -->
   <section id="zones" class="bg-[#F5F5F5] py-12 lg:py-16 border-t border-gray-200/60">
     <div class="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="flex items-center gap-2.5 mb-4">
@@ -845,7 +834,7 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- GATE 01 WITH FLOATING PASSPORT PREVIEW BADGE & POPUP MODAL LAUNCHER -->
+        <!-- GATE 01 SHOWCASES REAL PASSPORT BOOKLET IMAGE DIRECTLY (NO BUTTONS NEEDED) -->
         <div class="egate-scanner-card border-red-600 flex flex-col justify-between overflow-hidden">
           <div class="bg-gray-900 text-white px-5 py-3 flex items-center justify-between font-mono-fids border-b-2 border-red-600">
             <div class="flex items-center gap-2">
@@ -859,21 +848,20 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
             </div>
           </div>
 
-          <div class="aspect-video relative overflow-hidden bg-gray-100 border-b border-gray-200 group">
+          <!-- DIRECT PASSPORT BOOKLET IMAGE DISPLAY -->
+          <div class="p-4 bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 border-b border-gray-200 relative overflow-hidden flex flex-col items-center justify-center">
             <div class="absolute left-0 right-0 h-1 egate-laser-line z-20 pointer-events-none"></div>
-            <img src="assets/incheon_airport_zone.jpg" alt="Incheon Airport Arrival Gate" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
             
-            <div class="absolute top-3 left-3 bg-gray-900/90 backdrop-blur-md text-white text-[10px] font-mono-fids font-bold px-2.5 py-1 rounded-full border border-red-500/50">
-              BOARDING GATE 01 — AUTOMATIC SCANNER
+            <div class="w-full flex items-center justify-between mb-2 px-2 text-white font-mono-fids text-[10px]">
+              <span class="bg-red-600 text-white px-2.5 py-0.5 rounded-full font-bold">📖 OFFICIAL 7-STAMPS FESTIVAL PASSPORT</span>
+              <span class="text-amber-400 font-bold">GATE 01 REGISTRATION</span>
             </div>
 
-            <!-- FLOATING PASSPORT PREVIEW BADGE BUTTON OVERLAY -->
-            <div onclick="openPassportModal()" class="passport-floating-badge flex items-center gap-2 text-white font-mono-fids text-[11px] font-bold">
-              <span class="text-base animate-bounce">📖</span>
-              <div>
-                <span class="text-amber-400 block text-[9px] uppercase tracking-widest">OFFICIAL FESTIVAL PASSPORT</span>
-                <span class="text-white">CLICK TO PREVIEW 7 STAMPS BOOKLET 🔍</span>
-              </div>
+            <!-- TRANSPARENT PASSPORT BOOKLET IMAGE DIRECT DISPLAY -->
+            <img onclick="openPassportModal()" src="assets/festival_passport_real.png" alt="Official Festival Passport Booklet" class="w-full max-h-[260px] sm:max-h-[300px] object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] hover:scale-105 transition-transform duration-500 cursor-pointer">
+            
+            <div class="mt-2 text-[10px] text-gray-400 font-mono-fids text-center">
+              *Real Festival Passport Booklet with 7 Gate Stamp Circles (Incheon Airport, Myeongdong K-Beauty, DIY, Hanbok, Hongdae, Main Stage, K-Food)
             </div>
           </div>
 
@@ -886,12 +874,9 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
               </p>
             </div>
             
-            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] font-mono-fids bg-emerald-50/50 p-2.5 rounded-xl">
-              <span class="text-emerald-600 font-bold">TURNSTILE: ▲ PROCEED TO GATE 01</span>
-              <!-- DIRECT BUTTON TO OPEN FLOATING PASSPORT POPUP -->
-              <button onclick="openPassportModal()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg text-[10px] font-bold shadow-md transition-transform hover:scale-105">
-                📖 OPEN PASSPORT POPUP →
-              </button>
+            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] font-mono-fids text-emerald-600 font-bold bg-emerald-50/50 p-2.5 rounded-xl">
+              <span>TURNSTILE: ▲ PROCEED TO GATE 01</span>
+              <span>ACCESS GRANTED</span>
             </div>
           </div>
         </div>
@@ -2228,7 +2213,7 @@ body { font-family: 'DM Sans', system-ui, -apple-system, sans-serif; }
         <p class="text-xs text-gray-300 font-mono-fids">Collect all 7 stamps across experience zones to enter the Grand Lucky Draw!</p>
       </div>
 
-      <img src="assets/festival_passport_preview.jpg" alt="Official Korea Festival 2026 Passport Booklet" class="max-h-[580px] w-auto object-contain rounded-2xl border-2 border-gray-700 shadow-2xl">
+      <img src="assets/festival_passport_real.png" alt="Official Korea Festival 2026 Passport Booklet" class="max-h-[580px] w-auto object-contain drop-shadow-2xl">
       
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono-fids text-gray-300 w-full text-center">
         <div class="bg-gray-950 p-3 rounded-xl border border-gray-800">
@@ -2376,7 +2361,6 @@ function setUpdateGalleryImage(idx) {
   if (imgEl) imgEl.src = `assets/floorplan_update/update_${imgNum}.jpg`;
 }
 
-// PASSPORT BOOKLET POPUP MODAL ENGINE
 function openPassportModal() {
   const modal = document.getElementById('passportModal');
   modal.classList.remove('hidden-modal');
